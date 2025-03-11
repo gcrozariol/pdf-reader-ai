@@ -59,7 +59,8 @@ def ask(question, llm):
   return response
 
 def handler(event, context):
-  question = event.get('question')
+  body = json.loads(event.get('body', {}))
+  question = body.get('question')
   response = ask(question, llm).content
 
   return {
